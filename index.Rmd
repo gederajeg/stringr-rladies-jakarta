@@ -243,9 +243,66 @@ Kita bisa gunakan `table()` untuk mentabulasi karakter vektor nama warna untuk m
 table(word_colour_vector)
 ```
 
+```{r sortir-tabulasi}
+# sortir nama warna dari frekuensi tertinggi ke terendah
+word_colour_count <- table(word_colour_vector)
+word_colour_count <- sort(word_colour_count, decreasing = TRUE)
+word_colour_count
+```
+
 # Memecah teks menjadi unit yang lebih kecil
 
-to be updated
+Fungsi `str_split()` digunakan untuk memecah teks berdasarkan pada karakter mana teks tersebut dipecah. Contoh paling sederhana adalah memecah kalimat menjadi kata dengan memecahnya pada karakter spasi (yang merupakan pemisah kata untuk karakter Roman yang dipahami oleh komputer).
+
+```{r pecah-teks}
+# contoh sederhana pemecahan kalimat -> kata dengan dua kalimat 
+two_sentences <- eng_sentence_all_sample[1:2]
+
+# pecah teks pada karakter spasi `" "`.
+str_split(two_sentences, pattern = " ") # luarannya adalah List
+```
+
+Isunya adalah tanda baca seperti titik (`.`) masih menempel pada kata *ends.* dan *enough.*. Pada situasi inilah kekuatan dari pola pencarian dengan RegEx menjadi penting.
+
+Kita perlu merancang pola pencarian RegEx yang menyatakan bahwa kita ingin memisahkan/memecah teks pada kelompok karakter **selain** kelompok karakter pembentuk kata, yaitu kelompok karakter **di luar** karakter alfanumeris dan strip `"-"`. Dalam konteks bahasa Inggris, `"-"` dipertahankan untuk menangkap kata seperti *computer-readable* sebagai satu unit, bukannya menjadi dua unit *computer* dan *readable*. 
+
+RegEx yang bisa digunakan adalah `"[^a-zA-Z0-9-]+"`, yang artinya: satu atau lebih (`"+"`) kelompok karakter (`"[...]"`) yang bukan (`"^"`) (i) alfanumeris kapital dan kecil (`"a-zA-Z0-9"`) dan strip (`"-"`).
+
+```{r pecah-teks-regex}
+# pecah teks pada karakter non-alfanumeris dan spasi `" "`.
+str_split(two_sentences, pattern = "[^a-zA-Z0-9-]+")
+```
+
+Tentu luaran List ini bisa kita ubah menjadi vektor atomis:
+
+```{r unlist-luaran-str-split}
+split_sentence <- str_split(two_sentences, pattern = "[^a-zA-Z0-9-]+")
+unlist(split_sentence)
+```
+
+Pemecahan teks dari kalimat menjadi kata ini dapat dilihat dari dua perspektif:
+
+i. **memecah** (yaitu **memisahkan** dengan **menghilangkan**) karakter **selain** alfanumeris dan strip, menggunakan `str_split()`, atau
+
+i. **menarik** (yaitu **mengeluarkan**/**mengekstraksi**) karakter yang membangun suatu kata, yaitu karakter alfanumeris dan strip, menggunakan `str_extract_all()`.
+
+Jika kita mengambil perspektif kedua (dengan `str_extract_all()`), maka RegEx yang digunakan sedikit berbeda, yaitu dengan menghilangkan tanda negasi ('bukan') `"^"` dalam RegEx-nya. Perhatikan kode berikut dan bandingkan dengan teliti luaran `str_extract_all()` dengan luaran `str_split()` sebelumnya.
+
+```{r ekstrak-kata}
+# perspektif kedua memecah kalimat menjadi kata
+# dengan **mengkekstraksi** kata-kata
+str_extract_all(two_sentences, pattern = "[a-zA-Z0-9-]+")
+```
+
+Yang membedakan luaran `str_split()` dan `str_extract_all()` di atas, khususnya dalam konteks memecah teks kalimat menjadi kata adalah:
+
+i. luaran `str_split()` menandai penghilangan/pemecahan tanda baca, dalam hal ini titik, dengan karakter kosong (lihat karakter `""` setelah kata `"ends"` dan `"enough"`).
+
+i. luaran `str_extract_all()` hanya akan mengeluarkan/mengekstraksi karakter yang dinyatakan dalam pola pencariannya, yaitu satu atau lebih karakter alfanumeris dan strip; tidak ada karakter kosong yang mencerminkan dalam hal ini tanda titik.
+
+Kita yang menentukan fungsi dan luaran seperti apa yang diinginkan.
+
+
 
 # Mengubah komponen teks (*find and replace*)
 
