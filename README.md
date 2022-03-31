@@ -9,8 +9,8 @@ Program Studi [Sastra Inggris](https://twitter.com/sasingunud?lang=en) & *Centre
 
 # Pengantar
 
-Materi pada R Markdown Notebook ini dibawakan pada *R-Ladies Jakarta 15^th^ meetup* (2 April 2022, 1400-1600 WIB) dengan tema *Basic text manipulation with `stringr`*. Jika materi ini digunakan kembali, menjadi dasar, ataupun dikutip untuk keperluan lokakarya dan hal-hal lainnya, mohon mengutip materi ini sebagai berikut:
+Materi pada R Markdown Notebook ini dibawakan pada *R-Ladies Jakarta 15*^*th*^ *meetup* (2 April 2022, 1400-1600 WIB) dengan tema *Basic text manipulation with `stringr`*. Jika materi ini digunakan kembali, menjadi dasar, ataupun dikutip untuk keperluan lokakarya dan hal-hal lainnya, mohon mengutip materi ini sebagai berikut:
 
-> Rajeg, Gede Primahadi Wijaya. 2022. *Pengolahan teks dasar dengan R menggunakan [stringr](https://stringr.tidyverse.org/index.html)*. Disajikan pada [*R-Ladies Jakarta 15^th^ meetup*](https://udayananetworking.unud.ac.id/lecturer/gallery/photo/880-gede-primahadi-wijaya-rajeg/1318). [daring].
+> Rajeg, Gede Primahadi Wijaya. 2022. *Pengolahan teks dasar dengan R menggunakan [stringr](https://stringr.tidyverse.org/index.html)*. Disajikan pada [*R-Ladies Jakarta 15*^*th*^ *meetup*](https://udayananetworking.unud.ac.id/lecturer/gallery/photo/880-gede-primahadi-wijaya-rajeg/1318). [daring].
 
 Pembaca disarankan mempelajari langsung dua sumber utama terkait `stringr`, yaitu (i) buku teks oleh Wickham dan Grolemund [-@wickham_r_2017], utamanya [Bab 14](https://r4ds.had.co.nz/strings.html), dan (ii) [*cheatsheet*](https://github.com/rstudio/cheatsheets/blob/main/strings.pdf) PDF untuk fungsi-fungsi kunci dalam `stringr`.
