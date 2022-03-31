@@ -244,4 +244,10 @@ table(word_colour_vector)
 
 # Memecah teks menjadi unit yang lebih kecil
 
+to be updated
+
+# Mengubah komponen teks (*find and replace*)
+
+to be updated
+
 # Daftar acuan
