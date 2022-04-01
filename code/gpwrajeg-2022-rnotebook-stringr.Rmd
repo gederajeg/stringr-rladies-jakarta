@@ -13,8 +13,8 @@ output:
     toc: yes
     toc_float: yes
 link-citations: yes
-bibliography: "references.bib"
-csl: unified_stylesheet_linguistics.csl
+bibliography: "../references.bib"
+csl: "../unified_stylesheet_linguistics.csl"
 ---
 
 <style>
@@ -42,9 +42,9 @@ Pembaca disarankan mempelajari langsung dua sumber utama terkait `stringr`, yait
 
 # Persiapan
 
-```{r setup}
+```{r setup, echo = FALSE}
 # global option chunck
-knitr::opts_chunk$set(echo = TRUE, include = TRUE)
+knitr::opts_chunk$set(echo = TRUE, include = TRUE, message = FALSE, warning = FALSE)
 ```
 
 ```
@@ -62,7 +62,7 @@ library(stringr)
 Muat data teks berupa kalimat dan kata-kata.
 
 ```{r muat-data-kalimat-stringr-semua}
-eng_sentence_all <- scan(file = "data/eng_stringr_sentences_all.txt", what = "char", sep = "\n", quiet = TRUE)
+eng_sentence_all <- scan(file = "../data/eng_stringr_sentences_all.txt", what = "char", sep = "\n", quiet = TRUE)
 
 length(eng_sentence_all) # ada 720 elemen kalimat
 
@@ -70,13 +70,13 @@ sample(eng_sentence_all, size = 3) # tampilkan 3 kalimat acak saja
 ```
 
 ```{r muat-data-ly, echo = FALSE, include = FALSE, eval = FALSE}
-eng_sentence_ly <- scan(file = "data/eng_sentences_ly.txt", what = "char", sep = "\n", quiet = TRUE)
+eng_sentence_ly <- scan(file = "../data/eng_sentences_ly.txt", what = "char", sep = "\n", quiet = TRUE)
 
 sample(eng_sentence_ly, size = 3)
 ```
 
 ```{r muat-data-ze, echo = FALSE, include = FALSE, eval = FALSE}
-eng_sentence_ze <- scan(file = "data/eng_sentences_ze.txt", what = "char", sep = "\n", quiet = TRUE)
+eng_sentence_ze <- scan(file = "../data/eng_sentences_ze.txt", what = "char", sep = "\n", quiet = TRUE)
 
 sample(eng_sentence_ze, size = 3)
 ```
@@ -98,10 +98,10 @@ sample(fruits, size = 3)
 Fungsi `str_view_all()` memerlukan kita menginstall package `htmlwidgets`. Jika tidak, error akan muncul seperti pada gambar di bawah ini.
 
 ```{r error-html-widget, echo = FALSE}
-knitr::include_graphics("htmlwidget-error.png")
+knitr::include_graphics("../data/htmlwidget-error.png")
 ```
 
-```{r install-htmlwidgets, eval = FALSE}
+```
 # install htmlwidgets package
 install.packages("htmlwidgets")
 ```
@@ -142,7 +142,7 @@ Fungsi `str_detect()` juga dapat digunakan untuk menyaring observasi yang diingi
 
 ```{r muat-data-tabel}
 # muat data tabel hanya kolom 4 - 7
-verbs_idn <- read.table(file = "data/verb_semantics.txt", header = TRUE, sep = "\t")[4:7]
+verbs_idn <- read.table(file = "../data/verb_semantics.txt", header = TRUE, sep = "\t")[4:7]
 
 # lihat enam baris pertama
 head(verbs_idn)
