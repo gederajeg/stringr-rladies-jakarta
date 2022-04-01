@@ -18,13 +18,15 @@ csl: unified_stylesheet_linguistics.csl
 ---
 
 <style>
-p.comment {
-background-color: #E5FFCC;
-padding: 10px;
-border: 1px solid black;
-margin-left: 25px;
-border-radius: 5px;
+
+  p.comment {
+  background-color: #E5FFCC;
+  padding: 10px;
+  border: 1px solid black;
+  margin-left: 25px;
+  border-radius: 5px;
 }
+
 </style>
 
 
@@ -177,8 +179,11 @@ ing_output
 1. Buah apa yang namanya mengandung karakter `"ck"`? Gunakan `str_subset()` untuk menjawab pertanyaan ini.
 1. Gunakan `str_subset()` untuk menyaring kalimat dalam vektor `eng_sentence_all` yang mengandung rangkaian karakter `"who"`. Apakah pola pencarian `"who"` ini mengeluarkan kalimat yang mengandung kata *who* 'siapa' dalam bahasa Inggris?
 
+---------
 
-<p class="comment">**Catatan tentang _regular expressions_**<br><i>[Regular expressions](https://www.regular-expressions.info/tutorial.html)</i> (RegEx) adalah pola pencarian karakter yang lebih canggih dan fleksibel yang perlu dipelajari untuk pengolahan dan manipulasi teks tingkat lanjut [lihat @wickham_r_2017, sub-bagian 14.3 untuk ulasan lebih rinci]. Salah satu jenis ReGex yang penting diketahui adalah pewatas rangkaian karakter (*anchor character*): awal (`"^"`) atau akhir (`"$"`) karakter, dan pewatas kata (*word boundary*) (`"\\b"`). <br><br>Untuk kasus pencarian rangkaian karakter `"who"` sebelumnya, kita melakukan pencarian dengan rangkaian karakter tanpa RegEx karena kita tidak memperinci bahwa karakter `"who"` yang kita inginkan adalah kata _who_ bukannya rangkaian karakter `"who"` yang bisa muncul dalam kata _**who**le_, _**who**ever_, dll. Untuk itu, pola pencarian kita untuk "kata" _who_ (bukan rangkaian karakter `"who"`) haruslah lebih spesifik dan karakter RegEx pewatas kata (`"\\b"`) dapat membantu dalam hal ini, yaitu `"\\bwho\\b"`. <br><br>Bandingkan luaran kedua baris kode berikut untuk pola pencarian dengan dan tanpa RegEx pewatas kata:</p>
+<p class="comment">**Catatan tentang _regular expressions_**<br><i>[Regular expressions](https://www.regular-expressions.info/tutorial.html)</i> (RegEx) adalah pola pencarian karakter yang lebih canggih dan fleksibel yang perlu dipelajari untuk pengolahan dan manipulasi teks tingkat lanjut [lihat @wickham_r_2017, sub-bagian 14.3 untuk ulasan lebih rinci]. Salah satu jenis ReGex yang penting diketahui adalah **pewatas rangkaian karakter yang mencerminkan kata** (*word boundary*) (`"\\b"`). Untuk kasus pencarian rangkaian karakter `"who"` sebelumnya, kita melakukan pencarian dengan rangkaian karakter tanpa RegEx karena kita tidak memperinci bahwa karakter `"who"` yang kita inginkan adalah kata _who_ bukannya rangkaian karakter `"who"` yang bisa muncul dalam kata _**who**le_, _**who**ever_, dll. Untuk itu, pola pencarian kita untuk "kata" _who_ (bukan rangkaian karakter `"who"`) haruslah lebih spesifik dan karakter RegEx pewatas kata (`"\\b"`) dapat membantu dalam hal ini, yaitu `"\\bwho\\b"`.</p>
+
+Bandingkan luaran kedua baris kode berikut untuk pola pencarian dengan dan tanpa RegEx pewatas kata (`"\\b"`):
 
 ```{r literal-search}
 # tanpa regex pewatas kata "\\b" di kedua sisi karakter yang dicari
@@ -200,6 +205,53 @@ str_view_all(string = eng_sentence_all, pattern = "\\bwho\\b", match = TRUE)
 
 1. Gunakan RegEx pewatas kata (`"\\b"`) dengan `str_subset()` untuk menyaring kalimat dalam vektor `eng_sentence_all` yang mengandung kata-kata yang **diakhiri** dengan rangkaian karakter `"ing"` (misalnya, kata-kata seperti _text**ing**_, _liv**ing**_, _r**ing**_, _spr**ing**_, dll.)
 1. Gunakan `str_subset()` dan pola pencarian dengan RegEx pewatas kata (`"\\b"`) untuk mengeluarkan kata-kata yang **diawali** dengan karakter `"ch"` (misalnya _**ch**ance_, _**ch**ap_, dll.) dalam vektor teks `words`.
+
+------
+
+<p class="comment">**Catatan tentang _regular expressions_**<br>Selain pewatas rangkaian karakter berupa kata, terdapat dua lagi ReGex pewatas rangkaian karakter yang penting diketahui, yaitu **pewatas rangkaian karakter** secara umum (*anchor character*): (i) pewatas **posisi awal** rangkaian karakter (`"^"`) dan (ii) pewatas **posisi akhir** rangkaian karakter (`"$"`).</p> 
+
+Perhatikan kode berikut sebagai contoh penggunaan RegEx pewatas awal dan akhir rangkaian karakter [dikutip dari @wickham_r_2017, 202]:
+
+```{r end-of-string}
+# buat data sederhana
+x <- c("apple", "banana", "pear")
+
+# menangkap karakter `"a"` yang muncul di akhir (`"$"`) rangkaian karakter nama buah pada vektor `x`
+str_view_all(string = x, pattern = "a$")
+str_subset(string = x, pattern = "a$")
+```
+
+
+```{r beginning-of-string}
+# menangkap karakter `"a"` yang muncul di akhir (`"$"`) rangkaian karakter nama buah pada vektor `x`
+str_view_all(string = x, pattern = "^a")
+str_subset(string = x, pattern = "^a")
+```
+
+Kita bisa menggabungkan `"^"` dan `"$"` untuk mempertegas bahwa kita hanya ingin menangkap rangkaian karakter secara utuh. Bandingkan kedua kode berikut [dikutip dari @wickham_r_2017, 202]:
+
+```{r partial-match}
+# buat data lain
+xx <- c("apple pie", "apple", "apple cake")
+
+# pencarian sederhana (tanpa RegEx) untuk menangkap rangkaian karakter `"apple"`
+str_view_all(string = xx, pattern = "apple")
+str_subset(string = xx, pattern = "apple")
+```
+
+```{r complete-match}
+# menangkap hanya rangkaian karakter utuh dari awal hingga akhir rangkaian karakter
+str_view_all(string = xx, pattern = "^apple$")
+str_subset(string = xx, pattern = "^apple$")
+```
+
+### Latihan {-}
+
+1. Buah apa saja yang namanya **diawali** dengan karakter konsonan `"b"`? Gunakan `str_subset()` untuk mengeluarkan dari vektor `fruits` nama-nama buah yang diawali dengan karakter `"b"`.
+
+1. Ada berapa buah yang namanya **berakhir** dengan karakter vokal `"o"`? Gunakan `str_subset()` untuk mengeluarkan dari vektor `fruits` nama-nama buah yang diawali dengan karakter `"o"`.
+
+------
 
 # Mengeluarkan (*extract*) pola karakter dari dalam teks
 
