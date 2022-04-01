@@ -8,7 +8,7 @@ output:
     fig_caption: yes
     fig_width: 6
     theme: "united"
-    highlight: "kate"
+    highlight: "pygment"
     number_sections: yes
     toc: yes
     toc_float: yes
@@ -38,7 +38,7 @@ Materi pada R Markdown Notebook ini dibawakan pada [*R-Ladies Jakarta 15*^*th*^ 
 
 > Rajeg, Gede Primahadi Wijaya. 2022. Pengolahan teks dasar dengan R menggunakan stringr. *Open Science Framework (OSF)*. doi: [10.17605/OSF.IO/9ZHDJ](https://doi.org/10.17605/OSF.IO/9ZHDJ). https://osf.io/9zhdj/ (2 April, 2022).
 
-Pembaca disarankan mempelajari langsung dua sumber utama terkait `stringr`, yaitu (i) buku teks oleh Wickham dan Grolemund [-@wickham_r_2017], utamanya [Bab 14](https://r4ds.had.co.nz/strings.html), dan (ii) [*cheatsheet*](https://github.com/rstudio/cheatsheets/blob/main/strings.pdf) PDF untuk fungsi-fungsi kunci dalam `stringr`.
+Pembaca disarankan mempelajari langsung dua sumber utama terkait `stringr`, yaitu (i) buku teks oleh Wickham dan Grolemund [-@wickham_r_2017], utamanya [Bab 14](https://r4ds.had.co.nz/strings.html), dan (ii) [*cheatsheet*](https://github.com/rstudio/cheatsheets/blob/main/strings.pdf) PDF untuk fungsi-fungsi kunci dalam `stringr`. Bacaan lain yang mungkin bisa dilihat adalah makalah kami [@rajeg_working_2018] yang salah satu bagiannya membahas pengolahan teks dasar menggunakan sejumlah fungsi pengolahan teks dari instalasi dasar R (bukan menggunakan `stringr`) (kode sumber makalah tersebut dapat diakses melalui [tautan berikut](https://doi.org/10.4225/03/5a7ee2ac84303) atau [berikut](https://osf.io/s6kh8/)).
 
 # Persiapan
 
@@ -59,7 +59,7 @@ Aktifkan modul/package `stringr`.
 library(stringr)
 ```
 
-Muat data kalimat.
+Muat data teks berupa kalimat dan kata-kata.
 
 ```{r muat-data-kalimat-stringr-semua}
 eng_sentence_all <- scan(file = "data/eng_stringr_sentences_all.txt", what = "char", sep = "\n", quiet = TRUE)
@@ -69,13 +69,13 @@ length(eng_sentence_all) # ada 720 elemen kalimat
 sample(eng_sentence_all, size = 3) # tampilkan 3 kalimat acak saja
 ```
 
-```{r muat-data-ly}
+```{r muat-data-ly, echo = FALSE, include = FALSE, eval = FALSE}
 eng_sentence_ly <- scan(file = "data/eng_sentences_ly.txt", what = "char", sep = "\n", quiet = TRUE)
 
 sample(eng_sentence_ly, size = 3)
 ```
 
-```{r muat-data-ze}
+```{r muat-data-ze, echo = FALSE, include = FALSE, eval = FALSE}
 eng_sentence_ze <- scan(file = "data/eng_sentences_ze.txt", what = "char", sep = "\n", quiet = TRUE)
 
 sample(eng_sentence_ze, size = 3)
@@ -214,35 +214,35 @@ Perhatikan kode berikut sebagai contoh penggunaan RegEx pewatas awal dan akhir r
 
 ```{r end-of-string}
 # buat data sederhana
-x <- c("apple", "banana", "pear")
+fruit_mini <- c("apple", "banana", "pear")
 
-# menangkap karakter `"a"` yang muncul di akhir (`"$"`) rangkaian karakter nama buah pada vektor `x`
-str_view_all(string = x, pattern = "a$")
-str_subset(string = x, pattern = "a$")
+# menangkap karakter `"a"` yang muncul di akhir (`"$"`) rangkaian karakter nama buah pada vektor `fruit_mini`
+str_view_all(string = fruit_mini, pattern = "a$")
+str_subset(string = fruit_mini, pattern = "a$")
 ```
 
 
 ```{r beginning-of-string}
-# menangkap karakter `"a"` yang muncul di akhir (`"$"`) rangkaian karakter nama buah pada vektor `x`
-str_view_all(string = x, pattern = "^a")
-str_subset(string = x, pattern = "^a")
+# menangkap karakter `"a"` yang muncul di akhir (`"$"`) rangkaian karakter nama buah pada vektor `fruit_mini`
+str_view_all(string = fruit_mini, pattern = "^a")
+str_subset(string = fruit_mini, pattern = "^a")
 ```
 
 Kita bisa menggabungkan `"^"` dan `"$"` untuk mempertegas bahwa kita hanya ingin menangkap rangkaian karakter secara utuh. Bandingkan kedua kode berikut [dikutip dari @wickham_r_2017, 202]:
 
 ```{r partial-match}
 # buat data lain
-xx <- c("apple pie", "apple", "apple cake")
+fruit_cake <- c("apple pie", "apple", "apple cake")
 
 # pencarian sederhana (tanpa RegEx) untuk menangkap rangkaian karakter `"apple"`
-str_view_all(string = xx, pattern = "apple")
-str_subset(string = xx, pattern = "apple")
+str_view_all(string = fruit_cake, pattern = "apple")
+str_subset(string = fruit_cake, pattern = "apple")
 ```
 
 ```{r complete-match}
 # menangkap hanya rangkaian karakter utuh dari awal hingga akhir rangkaian karakter
-str_view_all(string = xx, pattern = "^apple$")
-str_subset(string = xx, pattern = "^apple$")
+str_view_all(string = fruit_cake, pattern = "^apple$")
+str_subset(string = fruit_cake, pattern = "^apple$")
 ```
 
 ### Latihan {-}
@@ -287,7 +287,7 @@ word_colour_vector
 
 Gunakan `str_sort()` untuk mengurutkan karakter secara alfabetis.
 
-```{r}
+```{r menyortir-teks-secara-alfabetis}
 str_sort(word_colour_vector)
 ```
 
@@ -316,7 +316,7 @@ two_sentences <- eng_sentence_all_sample[1:2]
 str_split(two_sentences, pattern = " ") # luarannya adalah List
 ```
 
-Isunya adalah tanda baca seperti titik (`.`) masih menempel pada kata *ends.* dan *enough.*. Pada situasi inilah kekuatan dari pola pencarian dengan RegEx menjadi penting.
+Isunya adalah tanda baca seperti titik (`.`) masih menempel pada kata yang mengakhiri kalimat. Pada situasi inilah kekuatan dari RegEx menjadi penting.
 
 Kita perlu merancang pola pencarian RegEx yang menyatakan bahwa kita ingin memisahkan/memecah teks pada kelompok karakter **selain** kelompok karakter pembentuk kata, yaitu kelompok karakter **di luar** karakter alfanumeris dan strip `"-"`. Dalam konteks bahasa Inggris, `"-"` dipertahankan untuk menangkap kata seperti *computer-readable* sebagai satu unit, bukannya menjadi dua unit *computer* dan *readable*. 
 
@@ -357,9 +357,120 @@ i. luaran `str_extract_all()` hanya akan mengeluarkan/mengekstraksi karakter yan
 Kita yang menentukan fungsi dan luaran seperti apa yang diinginkan.
 
 
+# Mengubah komponen teks
 
-# Mengubah komponen teks (*find and replace*)
+## Mengubah karakter menjadi huruf besar atau kecil
 
-to be updated
+Fungsi `str_to_upper()` mengubah karakter menjadi huruf kapital dan `str_to_lower()` menjadi huruf kecil.
 
-# Daftar acuan
+```{r upper-case}
+# mengubah nama warna sebelumnya menjadi huruf kapital
+word_colour_caps <- str_to_upper(string = word_colour_vector)
+word_colour_caps
+```
+
+```{r lower-case}
+# mengubah nama warna kapital menjadi huruf kecil
+str_to_lower(string = word_colour_caps)
+```
+
+### Latihan {-}
+
+1. Lihat isi vektor `two_sentences` pada konsol dan perhatikan bentuk rangkaian karakternya. Kemudian jalankan fungsi `str_to_title()` dengan input `two_sentences`. Perubahan apa yang terjadi dan apa yang dilakukan oleh `str_to_title()`?
+
+## Mengganti komponen teks dengan karakter lain
+
+Terkadang kita perlu mengubah komponen teks tertentu layaknya fungsi *find and replace* pada peranti seperti MS Word. Dalam stringr, kita bisa menggunakan `str_replace()` dan `str_replace_all()`. 
+
+Varian dasar **tanpa** `..._all()`, yaitu `str_replace()`, hanya akan mengganti karakter yang **pertama kali** ditangkap oleh pola pencariannya, sedangkan karakter yang sama yang muncul setelahnya tidak akan ditangkap dan diganti.
+
+Perhatikan kode berikut yang mencoba mengganti karakter `"e"` pada vektor `fruit_cake`.
+
+```{r}
+# lihat kembali vektor `fruit_cake`
+fruit_cake
+```
+
+
+```{r mengganti-sederhana}
+# gunakan str_replace() untuk mengganti karakter `"e"` yang ditemukan pertama dengan strip `"-"`
+str_replace(string = fruit_cake, pattern = "e", replacement = "-")
+```
+
+```{r mengganti-semua}
+# gunakan str_replace_all() untuk mengganti SEMUA karakter `"e"` dengan strip `"-"`
+str_replace_all(string = fruit_cake, pattern = "e", replacement = "-")
+```
+
+### Latihan {-}
+
+1. Ganti rangkaian karakter untuk kata `"apple"` pada vektor `fruit_cake` (yang berisi `"apple pie"`, `"apple"`, dan `"apple cake"`) dengan kata `"butter"`.
+
+
+# Menggabungkan vektor rangkaian karakter
+
+Untuk menggabungkan dua atau lebih rangkaian karakter, gunakan `str_c()`.
+
+```{r gabung-sederhana}
+# menggabungkan dua rangkaian karakter: "ba" dan "li"
+str_c("ba", "li")
+```
+
+```{r gabung-sederhana-1}
+karakter_1 <- c("b", "l", "k")
+karakter_2 <- c("a", "i", "u")
+
+# gabungkan tiga karakter dari dua vektor
+str_c(karakter_1, karakter_2)
+```
+
+```{r gabung-sederhana-2}
+# gabungkan dan apit tiga karakter dalam satu vektor dengan dua karakter lain yaitu "<m>"
+str_c("<m>", karakter_1, "<m>")
+```
+
+Jika salah satu dari dua vektor karakter yang akan digabung memiliki jumlah elemen yang lebih sedikit, maka elemen pada vektor tersebut akan digunakan ulang. Perhatikan contoh berikut.
+
+```{r gabung-beda-ukuran}
+two_word_fruit <- c("apple", "banana")
+four_word_snack <- c("cake", "juice", "pie", "chocolate")
+
+# gabungkan kedua vektor di atas
+str_c(two_word_fruit, four_word_snack, sep = "_")
+```
+
+Gunakan argumen `sep = ...` untuk mengatur pemisah di antara rangkaian karakter yang digabungkan. Secara bawaan, argumen `sep = ...` telah diatur menjadi `sep = ""`.
+
+```{r gabung-separator}
+# atur pemisah di antara karakter yang digabungkan dengan `sep = ...`
+str_c(karakter_1, karakter_2, sep = "_")
+```
+
+Argumen `collapse = ...` akan menyatukan sejumlah rangkaian karakter menjadi **satu** rangkaian karakter. Bandingkan kedua kode berikut yang menggunakan `sep = ...` dan `collapse = ...`:
+
+```{r separated-combination}
+# dengan sep = ..., penggabungan berikut menghasilkan tiga elemen rangkaian karakter
+three_strings <- str_c("<m>", karakter_1, "<m>", sep = "_")
+three_strings
+
+# Hitung jumlah elemen dalam vektor `three_strings`
+length(three_strings)
+```
+
+```{r collapse}
+# dengan collapse = ..., penggabungan berikut menghasilkan satu elemen rangkaian karakter
+one_string <- str_c("<m>", karakter_1, "<m>", collapse = "_")
+one_string
+
+# Hitung jumlah elemen dalam vektor `one_string`
+length(one_string)
+```
+
+# *Session info* {-}
+
+```{r sessinfo}
+sessionInfo()
+```
+
+
+# Daftar acuan {-}
