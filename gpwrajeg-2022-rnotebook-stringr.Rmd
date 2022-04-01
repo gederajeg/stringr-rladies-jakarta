@@ -8,7 +8,7 @@ output:
     fig_caption: yes
     fig_width: 6
     theme: "united"
-    highlight: "pygments"
+    highlight: "kate"
     number_sections: yes
     toc: yes
     toc_float: yes
@@ -40,24 +40,26 @@ Pembaca disarankan mempelajari langsung dua sumber utama terkait `stringr`, yait
 
 # Persiapan
 
-```{r setup, message = FALSE, echo = TRUE}
+```{r setup}
 # global option chunck
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, include = TRUE)
 ```
 
-    # install package stringr jika belum terinstall
-    install.packages("stringr")
+```
+# install package stringr jika belum terinstall
+install.packages("stringr")
+```
 
 Aktifkan modul/package `stringr`.
 
-```{r aktifkan-modul-stringr, echo = TRUE}
+```{r aktifkan-modul-stringr}
 # load the packages
 library(stringr)
 ```
 
 Muat data kalimat.
 
-```{r muat-data-kalimat-stringr-semua, echo = TRUE}
+```{r muat-data-kalimat-stringr-semua}
 eng_sentence_all <- scan(file = "data/eng_stringr_sentences_all.txt", what = "char", sep = "\n", quiet = TRUE)
 
 length(eng_sentence_all) # ada 720 elemen kalimat
@@ -65,24 +67,24 @@ length(eng_sentence_all) # ada 720 elemen kalimat
 sample(eng_sentence_all, size = 3) # tampilkan 3 kalimat acak saja
 ```
 
-```{r muat-data-ly, echo = TRUE}
+```{r muat-data-ly}
 eng_sentence_ly <- scan(file = "data/eng_sentences_ly.txt", what = "char", sep = "\n", quiet = TRUE)
 
 sample(eng_sentence_ly, size = 3)
 ```
 
-```{r muat-data-ze, echo = TRUE}
+```{r muat-data-ze}
 eng_sentence_ze <- scan(file = "data/eng_sentences_ze.txt", what = "char", sep = "\n", quiet = TRUE)
 
 sample(eng_sentence_ze, size = 3)
 ```
 
-```{r muat-data-kata, echo = TRUE}
+```{r muat-data-kata}
 words <- stringr::words # data kata (*words*) dari package stringr
 sample(words, size = 3)
 ```
 
-```{r muat-data-nama-buah, echo = TRUE}
+```{r muat-data-nama-buah}
 fruits <- stringr::fruit # data kata-kata nama buah (*fruits*) dari package stringr
 sample(fruits, size = 3)
 ```
@@ -97,14 +99,14 @@ Fungsi `str_view_all()` memerlukan kita menginstall package `htmlwidgets`. Jika 
 knitr::include_graphics("htmlwidget-error.png")
 ```
 
-```{r install-htmlwidgets, echo = TRUE, eval = FALSE}
+```{r install-htmlwidgets, eval = FALSE}
 # install htmlwidgets package
 install.packages("htmlwidgets")
 ```
 
 Kode berikut mencoba menampilkan keberadaan rangkaian karakater `"ze"` dalam vektor teks `eng_sentence_all`.
 
-```{r melihat-hasil-pencarian, echo = TRUE, message = FALSE}
+```{r melihat-hasil-pencarian, message = FALSE}
 str_view_all(string = eng_sentence_all, pattern = "ze", match = TRUE)
 ```
 
