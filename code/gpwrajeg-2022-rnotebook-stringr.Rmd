@@ -12,6 +12,7 @@ output:
     number_sections: yes
     toc: yes
     toc_float: yes
+    code_folding: show
 link-citations: yes
 bibliography: "../references.bib"
 csl: "../unified_stylesheet_linguistics.csl"
@@ -465,6 +466,18 @@ one_string
 # Hitung jumlah elemen dalam vektor `one_string`
 length(one_string)
 ```
+
+# Menyimpan vektor karakter ke dalam berkas teks (*plain text*)
+
+Gunakan fungsi `cat()` yang tersedia dari instalasi dasar R untuk menyimpan vektor karakter ke dalam berkas teks sederhana (*plain text* dengan ekstensi `.txt`).
+
+```{r saving-character-vector}
+# simpan vektor nama warna ke berkas `"selected-colours.txt"`
+# dalam direktori `results`
+# yang masing-masing elemen vektornya dipisahkan dengan baris baru (`sep="\n"`)
+cat(word_colour_vector, file = "../results/selected-colours.txt", sep = "\n")
+```
+
 
 # *Session info* {-}
 

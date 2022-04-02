@@ -2,6 +2,7 @@
 author: 
 - name: '[Gede Primahadi Wijaya Rajeg](https://udayananetworking.unud.ac.id/lecturer/880-gede-primahadi-wijaya-rajeg) <a itemprop="sameAs" content="https://orcid.org/0000-0002-2047-8621" href="https://orcid.org/0000-0002-2047-8621" target="orcid.widget" rel="noopener noreferrer" style="vertical-align:top;"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" style="width:1em;margin-right:.5em;" alt="ORCID iD icon"></a>'
   affiliation: "Program Studi [Sastra Inggris](https://twitter.com/sasingunud?lang=en)  & *Centre for Interdisciplinary Research on the Humanities and Social Sciences* ([CIRHSS](http://www.cirhss.org)), [Fakultas Ilmu Budaya](https://fib.unud.ac.id), [Universitas Udayana](https://www.unud.ac.id)"
+date: "*Created*: 1 April, 2022; *Last update*: `r format(Sys.time(), '%d %B, %Y')`"
 title: "Pengolahan teks dasar dengan [R](https://www.r-project.org) menggunakan [stringr](https://stringr.tidyverse.org/index.html)"
 output:
   html_notebook:
@@ -12,6 +13,7 @@ output:
     number_sections: yes
     toc: yes
     toc_float: yes
+    code_folding: show
 link-citations: yes
 bibliography: "references.bib"
 csl: unified_stylesheet_linguistics.csl
@@ -30,7 +32,7 @@ csl: unified_stylesheet_linguistics.csl
 </style>
 
 
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><i>The materials in this R Markdown Notebook are licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a></i>.
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a> [![](https://img.shields.io/badge/doi-10.17605/OSF.IO/9ZHDJ-lightblue.svg)](https://doi.org/10.17605/OSF.IO/9ZHDJ) <br /><i>The materials in this R Markdown Notebook are licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a></i>.
 
 # Pengantar {.unnumbered}
 
@@ -44,7 +46,7 @@ Pembaca disarankan mempelajari langsung dua sumber utama terkait `stringr`, yait
 
 ```{r setup}
 # global option chunck
-knitr::opts_chunk$set(echo = TRUE, include = TRUE)
+knitr::opts_chunk$set(echo = TRUE, include = TRUE, message = FALSE, warning = FALSE)
 ```
 
 ```
@@ -108,7 +110,7 @@ install.packages("htmlwidgets")
 
 Kode berikut mencoba menampilkan keberadaan rangkaian karakater `"ze"` dalam vektor teks `eng_sentence_all`.
 
-```{r melihat-hasil-pencarian, message = FALSE}
+```{r melihat-hasil-pencarian, message = FALSE, warning = FALSE}
 str_view_all(string = eng_sentence_all, pattern = "ze", match = TRUE)
 ```
 
@@ -465,6 +467,19 @@ one_string
 # Hitung jumlah elemen dalam vektor `one_string`
 length(one_string)
 ```
+
+# Menyimpan vektor karakter ke dalam berkas teks (*plain text*)
+
+Gunakan fungsi `cat()` yang tersedia dari instalasi dasar R untuk menyimpan vektor karakter ke dalam berkas teks sederhana (*plain text* dengan ekstensi `.txt`).
+
+```{r saving-character-vector}
+# simpan vektor nama warna ke berkas `"selected-colours.txt"`
+# dalam direktori `results`
+# yang masing-masing elemen vektornya dipisahkan dengan baris baru (`sep="\n"`)
+cat(word_colour_vector, file = "results/selected-colours.txt", sep = "\n")
+```
+
+
 
 # *Session info* {-}
 
