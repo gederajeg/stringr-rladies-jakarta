@@ -253,6 +253,9 @@ str_subset(string = fruit_cake, pattern = "^apple$")
 
 1. Ada berapa buah yang namanya **berakhir** dengan karakter vokal `"o"`? Gunakan `str_subset()` untuk mengeluarkan dari vektor `fruits` nama-nama buah yang diawali dengan karakter `"o"`.
 
+
+<p class="comment">**Tips**<br>`stringr` juga memiliki dua fungsi khusus untuk mendeteksi keberadaan (rangkaian) karakter yang muncul (i) **di awal** rangkaian karakter, yaitu fungsi [`str_starts()`](https://stringr.tidyverse.org/reference/str_starts.html), dan (ii) **di akhir** rangkaian karakter, yaitu fungsi [`str_ends()`](https://stringr.tidyverse.org/reference/str_starts.html). Layaknya `str_detect()`, kedua fungsi ini mengeluarkan vektor logis `TRUE` dan `FALSE`.<br/><br/>Misalnya, `str_starts(fruit_mini, "p")` akan mendeteksi adakah elemen teks dalam vektor `fruit_mini` yang diawali dengan karakter `"p"`, tanpa perlu menggunakan RegEx pewatas karakter awal `"^"`. Sebaliknya, `str_ends(fruit_mini, "p")` akan mendeteksi keberadaan teks dalam `fruit_mini` yang diakhiri dengan karakter `"p"`, tanpa perlu menggunakan RegEx pewatas karakter akhir `"$"`.<br/><br/>RegEx tetap diperlukan jika menggunakan fungsi `str_subset()` untuk menyaring teks yang diawali atau diakhiri dengan (rangkaian) karakter tertentu.</p>
+
 ------
 
 # Mengeluarkan (*extract*) pola karakter dari dalam teks
