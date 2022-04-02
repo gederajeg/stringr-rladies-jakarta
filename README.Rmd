@@ -32,4 +32,10 @@ Materi pada R Markdown Notebook ini dibawakan pada [*R-Ladies Jakarta 15*^*th*^ 
 
 Pembaca disarankan mempelajari langsung dua sumber utama terkait `stringr`, yaitu (i) buku teks oleh Wickham dan Grolemund [-@wickham_r_2017], utamanya [Bab 14](https://r4ds.had.co.nz/strings.html), dan (ii) [*cheatsheet*](https://github.com/rstudio/cheatsheets/blob/main/strings.pdf) PDF untuk fungsi-fungsi kunci dalam `stringr`.
 
+Salindia presentasi sebelum bagian lokakarya praktis (*workshop*) dapat diakses pada tautan berikut [@rajeg_basic_2022]:
+
+> Rajeg, Gede Primahadi Wijaya. 2022. *Basic text manipulation with stringr*. OSF Preprints. doi: [10.31219/osf.io/q9yva](https://doi.org/10.31219/osf.io/q9yva). [https://osf.io/q9yva/](https://doi.org/10.31219/osf.io/q9yva) (2 April, 2022).
+
+
+
 # Referensi

@@ -29,7 +29,7 @@ Materi pada R Markdown Notebook ini dibawakan pada [*R-Ladies Jakarta
 15*<sup>*th*</sup>
 *meetup*](https://udayananetworking.unud.ac.id/lecturer/gallery/photo/880-gede-primahadi-wijaya-rajeg/1318)
 (2 April 2022, 1400-1600 WIB) dengan tema *Basic text manipulation with
-`stringr`* ([Rajeg 2022](#ref-rajeg_pengolahan_2022)). Jika materi ini
+`stringr`* ([Rajeg 2022a](#ref-rajeg_pengolahan_2022)). Jika materi ini
 digunakan kembali, menjadi dasar, ataupun dikutip untuk keperluan
 lokakarya dan hal-hal lainnya, mohon mengutip materi ini sebagai
 berikut:
@@ -46,16 +46,34 @@ Pembaca disarankan mempelajari langsung dua sumber utama terkait
 [*cheatsheet*](https://github.com/rstudio/cheatsheets/blob/main/strings.pdf)
 PDF untuk fungsi-fungsi kunci dalam `stringr`.
 
+Salindia presentasi sebelum bagian lokakarya praktis (*workshop*) dapat
+diakses pada tautan berikut ([Rajeg 2022b](#ref-rajeg_basic_2022)):
+
+> Rajeg, Gede Primahadi Wijaya. 2022. *Basic text manipulation with
+> stringr*. OSF Preprints. doi:
+> [10.31219/osf.io/q9yva](https://doi.org/10.31219/osf.io/q9yva).
+> [https://osf.io/q9yva/](https://doi.org/10.31219/osf.io/q9yva) (2
+> April, 2022).
+
 # Referensi
 
 <div id="refs" class="references csl-bib-body hanging-indent">
 
 <div id="ref-rajeg_pengolahan_2022" class="csl-entry">
 
-Rajeg, Gede Primahadi Wijaya. 2022. Pengolahan teks dasar dengan R
+Rajeg, Gede Primahadi Wijaya. 2022a. Pengolahan teks dasar dengan R
 menggunakan stringr. *Open Science Framework (OSF)*.
 doi:[10.17605/OSF.IO/9ZHDJ](https://doi.org/10.17605/OSF.IO/9ZHDJ).
 <https://osf.io/9zhdj/> (2 April, 2022).
+
+</div>
+
+<div id="ref-rajeg_basic_2022" class="csl-entry">
+
+Rajeg, Gede Primahadi Wijaya. 2022b. *Basic text manipulation with
+stringr*. OSF Preprints.
+doi:[10.31219/osf.io/q9yva](https://doi.org/10.31219/osf.io/q9yva).
+<https://osf.io/q9yva/> (2 April, 2022).
 
 </div>
 
