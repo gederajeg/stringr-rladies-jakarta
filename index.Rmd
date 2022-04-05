@@ -40,6 +40,10 @@ Materi pada R Markdown Notebook ini dibawakan pada [*R-Ladies Jakarta 15*^*th*^ 
 
 > Rajeg, Gede Primahadi Wijaya. 2022. Pengolahan teks dasar dengan R menggunakan stringr. *Open Science Framework (OSF)*. doi: [10.17605/OSF.IO/9ZHDJ](https://doi.org/10.17605/OSF.IO/9ZHDJ). https://osf.io/9zhdj/ (2 April, 2022).
 
+Dan juga salindia pembuka sebelum pelaksanaan lokakarya [@rajeg_basic_2022]:
+
+> Rajeg, Gede Primahadi Wijaya. 2022. *Basic text manipulation with stringr*. OSF Preprints. doi: [10.31219/osf.io/q9yva](https://doi.org/10.31219/osf.io/q9yva). [https://osf.io/q9yva/](https://doi.org/10.31219/osf.io/q9yva) (2 April, 2022).
+
 Pembaca disarankan mempelajari langsung dua sumber utama terkait `stringr`, yaitu (i) buku teks oleh Wickham dan Grolemund [-@wickham_r_2017], utamanya [Bab 14](https://r4ds.had.co.nz/strings.html), dan (ii) [*cheatsheet*](https://github.com/rstudio/cheatsheets/blob/main/strings.pdf) PDF untuk fungsi-fungsi kunci dalam `stringr`. Bacaan lain yang mungkin bisa dilihat adalah makalah kami [@rajeg_working_2018] yang salah satu bagiannya membahas pengolahan teks dasar menggunakan sejumlah fungsi pengolahan teks dari instalasi dasar R (bukan menggunakan `stringr`) (kode sumber makalah tersebut dapat diakses melalui [tautan berikut](https://doi.org/10.4225/03/5a7ee2ac84303) atau [berikut](https://osf.io/s6kh8/)).
 
 # Persiapan
@@ -50,7 +54,7 @@ knitr::opts_chunk$set(echo = TRUE, include = TRUE, message = FALSE, warning = FA
 ```
 
 ```
-# install package stringr jika belum terinstall
+# install package stringr
 install.packages("stringr")
 ```
 
@@ -150,7 +154,7 @@ verbs_idn <- read.table(file = "data/verb_semantics.txt", header = TRUE, sep = "
 head(verbs_idn)
 ```
 
-Kode berikut menyaring observasi (`subset()`) dalam tabel data `verbs_idn` berdasarkan apakah kolom `example_target` mengandung teks (yaitu kata kerja *ber-*) dengan rangkaian karakter `"da"`.
+Kode berikut menyaring observasi (`subset()`) dalam tabel data `verbs_idn` berdasarkan apakah kolom `example_target` mengandung teks (yaitu kata kerja *ber-*) dengan rangkaian karakter `"da"` [lihat @primahadi_metonymy_2013 untuk makalah yang dilandasi atas data tabel tersebut].
 
 ```{r saring-observasi}
 subset(verbs_idn, str_detect(string = example_target, pattern = "da"))
@@ -178,12 +182,12 @@ ing_output
 
 ### Latihan {.unnumbered}
 
-1. Buah apa yang namanya mengandung karakter `"ck"`? Gunakan `str_subset()` untuk menjawab pertanyaan ini.
+1. Buah apa yang namanya mengandung karakter `"ck"`? Gunakan `str_subset()` pada vektor teks `fruits` untuk menjawab pertanyaan ini.
 1. Gunakan `str_subset()` untuk menyaring kalimat dalam vektor `eng_sentence_all` yang mengandung rangkaian karakter `"who"`. Apakah pola pencarian `"who"` ini mengeluarkan kalimat yang mengandung kata *who* 'siapa' dalam bahasa Inggris?
 
 ---------
 
-<p class="comment">**Catatan tentang _regular expressions_**<br><i>[Regular expressions](https://www.regular-expressions.info/tutorial.html)</i> (RegEx) adalah pola pencarian karakter yang lebih canggih dan fleksibel yang perlu dipelajari untuk pengolahan dan manipulasi teks tingkat lanjut [lihat @wickham_r_2017, sub-bagian 14.3 untuk ulasan lebih rinci]. Salah satu jenis ReGex yang penting diketahui adalah **pewatas rangkaian karakter yang mencerminkan kata** (*word boundary*) (`"\\b"`). Untuk kasus pencarian rangkaian karakter `"who"` sebelumnya, kita melakukan pencarian dengan rangkaian karakter tanpa RegEx karena kita tidak memperinci bahwa karakter `"who"` yang kita inginkan adalah kata _who_ bukannya rangkaian karakter `"who"` yang bisa muncul dalam kata _**who**le_, _**who**ever_, dll. Untuk itu, pola pencarian kita untuk "kata" _who_ (bukan rangkaian karakter `"who"`) haruslah lebih spesifik dan karakter RegEx pewatas kata (`"\\b"`) dapat membantu dalam hal ini, yaitu `"\\bwho\\b"`.</p>
+<p class="comment">**Catatan tentang _regular expressions_**<br><br/><i>[Regular expressions](https://www.regular-expressions.info/tutorial.html)</i> (RegEx) adalah pola pencarian karakter yang lebih canggih dan fleksibel yang perlu dipelajari untuk pengolahan dan manipulasi teks tingkat lanjut [lihat @wickham_r_2017, sub-bagian 14.3 untuk ulasan lebih rinci].<br/><br/> Salah satu jenis ReGex yang penting diketahui adalah **pewatas rangkaian karakter yang mencerminkan kata** (*word boundary*) (`"\\b"`). Untuk kasus pencarian rangkaian karakter `"who"` sebelumnya, kita melakukan pencarian dengan rangkaian karakter tanpa RegEx karena kita tidak memperinci bahwa karakter `"who"` yang kita inginkan adalah kata _who_ bukannya rangkaian karakter `"who"` yang bisa muncul dalam kata _**who**le_, _**who**ever_, dll. Untuk itu, pola pencarian kita untuk "kata" _who_ (bukan rangkaian karakter `"who"`) haruslah lebih spesifik dan karakter RegEx pewatas kata (`"\\b"`) dapat membantu dalam hal ini, yaitu `"\\bwho\\b"`.</p>
 
 Bandingkan luaran kedua baris kode berikut untuk pola pencarian dengan dan tanpa RegEx pewatas kata (`"\\b"`):
 
@@ -210,7 +214,7 @@ str_view_all(string = eng_sentence_all, pattern = "\\bwho\\b", match = TRUE)
 
 ------
 
-<p class="comment">**Catatan tentang _regular expressions_**<br>Selain pewatas rangkaian karakter berupa kata, terdapat dua lagi ReGex pewatas rangkaian karakter yang penting diketahui, yaitu **pewatas rangkaian karakter** secara umum (*anchor character*): (i) pewatas **posisi awal** rangkaian karakter (`"^"`) dan (ii) pewatas **posisi akhir** rangkaian karakter (`"$"`).</p> 
+<p class="comment">**Catatan tentang _regular expressions_**<br><br/>Selain pewatas rangkaian karakter berupa kata, terdapat dua lagi ReGex pewatas rangkaian karakter yang penting diketahui, yaitu **pewatas rangkaian karakter** secara umum (*anchor character*): (i) pewatas **posisi awal** rangkaian karakter (`"^"`) dan (ii) pewatas **posisi akhir** rangkaian karakter (`"$"`).</p> 
 
 Perhatikan kode berikut sebagai contoh penggunaan RegEx pewatas awal dan akhir rangkaian karakter [dikutip dari @wickham_r_2017, 202]:
 
@@ -254,7 +258,7 @@ str_subset(string = fruit_cake, pattern = "^apple$")
 1. Ada berapa buah yang namanya **berakhir** dengan karakter vokal `"o"`? Gunakan `str_subset()` untuk mengeluarkan dari vektor `fruits` nama-nama buah yang diawali dengan karakter `"o"`.
 
 
-<p class="comment">**Tips**<br>`stringr` juga memiliki dua fungsi khusus untuk mendeteksi keberadaan (rangkaian) karakter yang muncul (i) **di awal** rangkaian karakter, yaitu fungsi [`str_starts()`](https://stringr.tidyverse.org/reference/str_starts.html), dan (ii) **di akhir** rangkaian karakter, yaitu fungsi [`str_ends()`](https://stringr.tidyverse.org/reference/str_starts.html). Layaknya `str_detect()`, kedua fungsi ini mengeluarkan vektor logis `TRUE` dan `FALSE`.<br/><br/>Misalnya, `str_starts(fruit_mini, "p")` akan mendeteksi adakah elemen teks dalam vektor `fruit_mini` yang diawali dengan karakter `"p"`, tanpa perlu menggunakan RegEx pewatas karakter awal `"^"`. Sebaliknya, `str_ends(fruit_mini, "p")` akan mendeteksi keberadaan teks dalam `fruit_mini` yang diakhiri dengan karakter `"p"`, tanpa perlu menggunakan RegEx pewatas karakter akhir `"$"`.<br/><br/>RegEx tetap diperlukan jika menggunakan fungsi `str_subset()` untuk menyaring teks yang diawali atau diakhiri dengan (rangkaian) karakter tertentu.</p>
+<p class="comment">**Tips**<br><br/>`stringr` juga memiliki dua fungsi khusus untuk mendeteksi keberadaan (rangkaian) karakter yang muncul (i) **di awal** rangkaian karakter, yaitu fungsi [`str_starts()`](https://stringr.tidyverse.org/reference/str_starts.html), dan (ii) **di akhir** rangkaian karakter, yaitu fungsi [`str_ends()`](https://stringr.tidyverse.org/reference/str_starts.html). Layaknya `str_detect()`, kedua fungsi ini mengeluarkan vektor logis `TRUE` dan `FALSE`.<br/><br/>Misalnya, `str_starts(fruit_mini, "p")` akan mendeteksi adakah elemen teks dalam vektor `fruit_mini` yang diawali dengan karakter `"p"`, tanpa perlu menggunakan RegEx pewatas karakter awal `"^"`. Sebaliknya, `str_ends(fruit_mini, "p")` akan mendeteksi keberadaan teks dalam `fruit_mini` yang diakhiri dengan karakter `"p"`, tanpa perlu menggunakan RegEx pewatas karakter akhir `"$"`.<br/><br/>RegEx tetap diperlukan jika menggunakan fungsi `str_subset()` untuk menyaring teks yang diawali atau diakhiri dengan (rangkaian) karakter tertentu.</p>
 
 ------
 
