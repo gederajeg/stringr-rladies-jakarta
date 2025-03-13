@@ -5,7 +5,7 @@ authors:
     given-names: Gede Primahadi Wijaya
     orcid: https://orcid.org/0000-0002-2047-8621
 title: "Pengolahan teks dasar dengan R menggunakan stringr"
-version: 0.0.1
+version: 0.0.4
 date-released: 2022-04-02
 license: CC-BY-NC-SA
 repository-code: "https://github.com/gederajeg/stringr-rladies-jakarta"
