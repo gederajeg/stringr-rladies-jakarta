@@ -1,11 +1,44 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
 cff-version: 1.2.0
-message: "If you use materials and data from this repository, please cite them as below."
+title: Pengolahan teks dasar dengan R menggunakan stringr
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
 authors:
-  - family-names: Rajeg
-    given-names: Gede Primahadi Wijaya
-    orcid: https://orcid.org/0000-0002-2047-8621
-title: "Pengolahan teks dasar dengan R menggunakan stringr"
-version: 0.0.4
-date-released: 2022-04-02
-license: CC-BY-NC-SA
-repository-code: "https://github.com/gederajeg/stringr-rladies-jakarta"
+  - given-names: Gede Primahadi Wijaya
+    family-names: Rajeg
+    affiliation: Udayana University
+    orcid: 'https://orcid.org/0000-0002-2047-8621'
+identifiers:
+  - type: doi
+    value: 10.6084/m9.figshare.21579513
+    description: Figshare publication
+  - type: url
+    value: 'https://gederajeg.github.io/stringr-rladies-jakarta/'
+    description: Webpage publication
+repository-code: 'https://github.com/gederajeg/stringr-rladies-jakarta'
+url: 'https://gederajeg.github.io/stringr-rladies-jakarta/'
+abstract: >-
+  Tutorial daring penggunaan modul stringr untuk pengolahan
+  teks dengan bahasa pemrograman R. Tutorial ini disajikan
+  pada R-Ladies Jakarta 15th meet-up (2 April 2022,
+  1400-1600 WIB).
+keywords:
+  - stringr
+  - R programming
+  - CompLexico
+  - Universitas Udayana
+  - Udayana University
+  - R-Ladies Jakarta
+  - text processing
+  - string processing
+  - pengolahan teks
+  - pengolahan teks komputasional
+  - bahasa pemrograman R
+  - pengolahan teks dengan R
+license: CC-BY-NC-SA-4.0
+version: 0.0.5
+date-released: '2022-04-02'
